@@ -7,7 +7,7 @@ services:
     volumes:
     - ./config:/config
     - ./mach1:/data
-    command: --config /config/mach1.toml --chain config/authorityRound.json --bootnodes "enode://9674602f627073ee1819c13946ba0bdbecaff029403e36eed0d283d81e929fc9f1c3c9ceec8e3dcd7631418e8354068330a75bf200b719826149373655fa0057@mach2:30303,mach3:30303,mach4:30303"
+    command: --config /config/mach1.toml --chain /config/authorityRound.json --bootnodes "enode://9674602f627073ee1819c13946ba0bdbecaff029403e36eed0d283d81e929fc9f1c3c9ceec8e3dcd7631418e8354068330a75bf200b719826149373655fa0057@mach2:30303,enode://dca7f8ca08b6d377d4fa514ec4fd3a863773987c89a6e7f397994f6a21ca9b18030c9f773be0ed58bdd00b8540cda9b01767fda88c32630ab192e6a44a647bc6@mach3:30303,enode://33f6e035347e21688cdd53991569be0380b3a45714b7fefe03445e4f15fe9d85adfcdd0a9a5e863c6a47002952ce2934debc684b1b9684752a9a1a3cc7743b12@mach4:30303"
 
   mach2:
     container_name: mach2
@@ -15,21 +15,23 @@ services:
     volumes:
     - ./config:/config
     - ./mach2:/data
-    command: --config /config/mach1.toml --chain config/authorityRound.json --bootnodes "enode://17be28de20b5d2aa38d784817d491a9542155d00e46b91d4a3f3e449bd3d940743eaf2b89cef7bd3c05e2c3e322486bdf45c49dda0df1286ddb6023b25217aab@mach1:30303,mach3:30303,mach4:30303"
+    command: --config /config/mach2.toml --chain /config/authorityRound.json --bootnodes "enode://17be28de20b5d2aa38d784817d491a9542155d00e46b91d4a3f3e449bd3d940743eaf2b89cef7bd3c05e2c3e322486bdf45c49dda0df1286ddb6023b25217aab@mach1:30303,enode://dca7f8ca08b6d377d4fa514ec4fd3a863773987c89a6e7f397994f6a21ca9b18030c9f773be0ed58bdd00b8540cda9b01767fda88c32630ab192e6a44a647bc6@mach3:30303,enode://33f6e035347e21688cdd53991569be0380b3a45714b7fefe03445e4f15fe9d85adfcdd0a9a5e863c6a47002952ce2934debc684b1b9684752a9a1a3cc7743b12@mach4:30303"
 
   mach3:
     container_name: mach3
     image: docker.parity
     volumes:
+    - ./config:/config
     - ./mach3:/data
-    command: --bootnodes "mach1:30303,mach2:30303,mach4:30303"
+    command: --config /config/mach3.toml --chain /config/authorityRound.json --bootnodes "enode://17be28de20b5d2aa38d784817d491a9542155d00e46b91d4a3f3e449bd3d940743eaf2b89cef7bd3c05e2c3e322486bdf45c49dda0df1286ddb6023b25217aab@mach1:30303,enode://9674602f627073ee1819c13946ba0bdbecaff029403e36eed0d283d81e929fc9f1c3c9ceec8e3dcd7631418e8354068330a75bf200b719826149373655fa0057@mach2:30303,enode://33f6e035347e21688cdd53991569be0380b3a45714b7fefe03445e4f15fe9d85adfcdd0a9a5e863c6a47002952ce2934debc684b1b9684752a9a1a3cc7743b12@mach4:30303"
 
   mach4:
     container_name: mach4
     image: docker.parity
     volumes:
+    - ./config:/config
     - ./mach4:/data
-    command: --bootnodes "mach1:30303,mach2:30303,mach3:30303"
+    command: --config /config/mach4.toml --chain /config/authorityRound.json --bootnodes "enode://17be28de20b5d2aa38d784817d491a9542155d00e46b91d4a3f3e449bd3d940743eaf2b89cef7bd3c05e2c3e322486bdf45c49dda0df1286ddb6023b25217aab@mach1:30303,enode://9674602f627073ee1819c13946ba0bdbecaff029403e36eed0d283d81e929fc9f1c3c9ceec8e3dcd7631418e8354068330a75bf200b719826149373655fa0057@mach2:30303,enode://dca7f8ca08b6d377d4fa514ec4fd3a863773987c89a6e7f397994f6a21ca9b18030c9f773be0ed58bdd00b8540cda9b01767fda88c32630ab192e6a44a647bc6@mach3:30303"
 
   gateway:
     depends_on:

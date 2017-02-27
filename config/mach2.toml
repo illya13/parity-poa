@@ -15,4 +15,3 @@ disable = true
 password = ["/config/mach2.txt"]
 [mining]
 engine_signer = "0xec6f15a496467ba4006c9c3c18948e31c249e1a0"
-reseal_on_txs = "none"

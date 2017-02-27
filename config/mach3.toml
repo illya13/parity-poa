@@ -1,10 +1,10 @@
-[parity]
-chain = "chain.json"
-base_path = "d:/SOFT/Parity/mach3"
 [network]
-port = 30305
+port = 30303
 [rpc]
-disable = true
+port = 8545
+hosts = ["all"]
+interface = "0.0.0.0"
+apis = ["web3", "eth", "net", "personal", "parity", "parity_accounts", "parity_set", "signer"]
 [ui]
 disable = true
 [ipc]
@@ -12,7 +12,6 @@ disable = true
 [dapps]
 disable = true
 [account]
-password = ["mach3.txt"]
+password = ["/config/mach3.txt"]
 [mining]
 engine_signer = "0x22436aaf8a8374c47afabc040b169329f8c14a59"
-reseal_on_txs = "none"

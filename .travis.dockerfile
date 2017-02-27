@@ -43,4 +43,4 @@ VOLUME /config
 VOLUME /data
 
 EXPOSE 8080 8545 8180 30303
-ENTRYPOINT ["/build/parity/target/release/parity", "--base-path", "/data"]
+ENTRYPOINT ["/build/parity/target/release/parity", "--base-path", "/data", "--db-path", "/chains"]
