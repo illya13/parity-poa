@@ -14,6 +14,7 @@ script:
   - docker build -t docker.parity -f .travis.dockerfile .
   - cd contract
   - docker build -t docker.contract .
+  - cd ..
 
   - docker-compose up -d mach1 mach2 mach3 mach4 gateway
   - docker-compose logs --tail 100
