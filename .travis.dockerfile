@@ -3,7 +3,7 @@ WORKDIR /build
 # install tools and dependencies
 RUN apt-get -y update && \
     apt-get install -y --force-yes --no-install-recommends g++ gcc libc6 libc6-dev \
-        python binutils curl git make file ca-certificates zip dpkg-dev rhash openssl build-essential pkg-config libssl-dev
+        python binutils curl git make file ca-certificates zip dpkg-dev rhash openssl build-essential pkg-config libssl-dev libudev-dev
 
 # install AWS CLI
 RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
