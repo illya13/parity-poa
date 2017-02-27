@@ -1,12 +1,15 @@
 {
-	"name": "parity",
+	"name": "PoA",
 	"engine": {
 		"tendermint": {
 			"params": {
 				"gasLimitBoundDivisor": "0x0400",
 				"validators" : {
 					"list": [
-						"0xa8a27df4c6de84e5cbe6c7301b56e090249225aa"
+						"0xa8a27df4c6de84e5cbe6c7301b56e090249225aa",
+						"0xec6f15a496467ba4006c9c3c18948e31c249e1a0",
+						"0x22436aaf8a8374c47afabc040b169329f8c14a59",
+						"0x261d5a79d55bc37033f296b5df3c908c4e73e996"
 					]
 				}
 			}
@@ -15,7 +18,7 @@
 	"params": {
 		"accountStartNonce": "0x0",
 		"maximumExtraDataSize": "0x20",
-		"minGasLimit": "0x1388",
+		"minGasLimit": "0x8000000",
 		"networkID" : "0x2323"
 	},
 	"genesis": {
@@ -33,7 +36,7 @@
 		"timestamp": "0x00",
 		"parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
 		"extraData": "0x",
-		"gasLimit": "0x2fefd8"
+		"gasLimit": "0x8000000"
 	},
 	"accounts": {
 		"0000000000000000000000000000000000000001": { "balance": "1", "builtin": { "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } },

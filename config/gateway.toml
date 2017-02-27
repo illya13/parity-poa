@@ -1,0 +1,13 @@
+[network]
+port = 30303
+[rpc]
+port = 8545
+hosts = ["all"]
+interface = "0.0.0.0"
+apis = ["web3", "eth", "net", "personal", "parity", "parity_accounts", "parity_set", "signer"]
+[ui]
+disable = true
+[ipc]
+disable = true
+[dapps]
+disable = true
