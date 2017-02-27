@@ -8,6 +8,19 @@ const Wallet = require('ethereumjs-wallet');
 const Web3 = require('web3');
 
 const _web3 = new Web3(new Web3.providers.HttpProvider(config.get('provider')));
+_web3._extend({
+    property: 'parity',
+    methods: [],
+    properties:
+        [
+            new _web3._extend.Property({
+                name: 'pendingTransactions',
+                getter: 'parity_pendingTransactions',
+                outputFormatter: JSON.stringify
+            })
+        ]
+});
+
 const _contract = _web3.eth.contract(ABI).at(config.get('address'));
 
 let nonces = {};
@@ -74,7 +87,12 @@ function waitProcessed() {
     } else {
       blocks++;
       console.log("\tblock", res);
-      if (blocks > 1) {
+      console.log("\tpendingTransactions", _web3.parity.pendingTransactions);
+      if (JSON.parse(_web3.parity.pendingTransactions).length == 0) {
+        console.log("processed", ((new Date() - _start) / 1000) + ' s');
+        latestFilter.stopWatching();
+        verify();
+      } else if (blocks > 10) {
         console.log("processed", "FAILED");
         latestFilter.stopWatching();
         verify();
