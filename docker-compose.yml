@@ -1,0 +1,56 @@
+version: '2.1'
+
+services:
+  mach1:
+    container_name: mach1
+    image: docker.parity
+    volumes:
+    - ./config:/config
+    - ./mach1:/data
+    command: --config /config/mach1.toml --chain config/authorityRound.json --bootnodes "enode://9674602f627073ee1819c13946ba0bdbecaff029403e36eed0d283d81e929fc9f1c3c9ceec8e3dcd7631418e8354068330a75bf200b719826149373655fa0057@mach2:30303,mach3:30303,mach4:30303"
+
+  mach2:
+    container_name: mach2
+    image: docker.parity
+    volumes:
+    - ./config:/config
+    - ./mach2:/data
+    command: --config /config/mach1.toml --chain config/authorityRound.json --bootnodes "enode://17be28de20b5d2aa38d784817d491a9542155d00e46b91d4a3f3e449bd3d940743eaf2b89cef7bd3c05e2c3e322486bdf45c49dda0df1286ddb6023b25217aab@mach1:30303,mach3:30303,mach4:30303"
+
+  mach3:
+    container_name: mach3
+    image: docker.parity
+    volumes:
+    - ./mach3:/data
+    command: --bootnodes "mach1:30303,mach2:30303,mach4:30303"
+
+  mach4:
+    container_name: mach4
+    image: docker.parity
+    volumes:
+    - ./mach4:/data
+    command: --bootnodes "mach1:30303,mach2:30303,mach3:30303"
+
+  gateway:
+    depends_on:
+      - mach1
+      - mach2
+      - mach3
+      - mach4
+    container_name: gateway
+    image: docker.parity
+    ports:
+      - 8545:8545
+    volumes:
+    - ./gateway:/data
+    command: --bootnodes "mach1:30303,mach2:30303,mach3:30303,mach4:30303"
+
+  contract:
+    depends_on:
+      - gateway
+    container_name: contract
+    image: docker.contract
+    environment:
+      - "NODE_CONFIG={\"provider\": \"http://gateway:8545\", \"n\": 4000}"
+    command: node main.js
+

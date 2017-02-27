@@ -1,0 +1,18 @@
+[parity]
+chain = "chain.json"
+base_path = "d:/SOFT/Parity/mach3"
+[network]
+port = 30305
+[rpc]
+disable = true
+[ui]
+disable = true
+[ipc]
+disable = true
+[dapps]
+disable = true
+[account]
+password = ["mach3.txt"]
+[mining]
+engine_signer = "0x22436aaf8a8374c47afabc040b169329f8c14a59"
+reseal_on_txs = "none"

@@ -42,5 +42,5 @@ RUN file /build/parity/target/release/parity
 VOLUME /config
 VOLUME /data
 
-EXPOSE 8080 8545 8180
-ENTRYPOINT ["/build/parity/target/release/parity", "--config", "/config/config.toml", "--base-path", "/data"]
+EXPOSE 8080 8545 8180 30303
+ENTRYPOINT ["/build/parity/target/release/parity", "--base-path", "/data"]

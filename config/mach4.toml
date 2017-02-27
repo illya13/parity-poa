@@ -1,0 +1,18 @@
+[parity]
+chain = "chain.json"
+base_path = "d:/SOFT/Parity/mach4"
+[network]
+port = 30306
+[rpc]
+disable = true
+[ui]
+disable = true
+[ipc]
+disable = true
+[dapps]
+disable = true
+[account]
+password = ["mach4.txt"]
+[mining]
+engine_signer = "0x261d5a79d55bc37033f296b5df3c908c4e73e996"
+reseal_on_txs = "none"
