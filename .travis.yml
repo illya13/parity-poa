@@ -14,6 +14,7 @@ script:
   - docker build -t docker.parity -f .travis.dockerfile .
   - cd contract
   - docker build -t docker.contract .
+
   - docker-compose up -d mach1 mach2 mach3 mach4 gateway
   - docker-compose logs --tail 100
   - docker-compose run contract node deploy.js
@@ -25,3 +26,15 @@ script:
   - docker-compose logs --tail 100 mach4
   - docker-compose logs --tail 100 gateway
   - docker-compose rm -f
+
+  - docker-compose -f docker-compose-tendermint.yml up -d mach1 mach2 mach3 mach4 gateway
+  - docker-compose -f docker-compose-tendermint.yml logs --tail 100
+  - docker-compose -f docker-compose-tendermint.yml run contract node deploy.js
+  - docker-compose -f docker-compose-tendermint.yml run contract node main.js
+  - docker-compose -f docker-compose-tendermint.yml stop mach1 mach2 mach3 mach4 gateway
+  - docker-compose -f docker-compose-tendermint.yml logs --tail 100 mach1
+  - docker-compose -f docker-compose-tendermint.yml logs --tail 100 mach2
+  - docker-compose -f docker-compose-tendermint.yml logs --tail 100 mach3
+  - docker-compose -f docker-compose-tendermint.yml logs --tail 100 mach4
+  - docker-compose -f docker-compose-tendermint.yml logs --tail 100 gateway
+  - docker-compose -f docker-compose-tendermint.yml rm -f
