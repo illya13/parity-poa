@@ -16,5 +16,8 @@ script:
   - docker build -t docker.contract .
   - docker-compose up -d mach1 mach2 mach3 mach4 gateway
   - docker-compose logs --tail 100
+  - docker-compose run contract node deploy.js
+  - docker-compose run contract node main.js
   - docker-compose stop mach1 mach2 mach3 mach4 gateway
-  - docker-compose rm -f mach1 mach2 mach3 mach4 gateway
+  - docker-compose logs --tail 100
+  - docker-compose rm -f
