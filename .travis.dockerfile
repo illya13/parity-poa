@@ -39,5 +39,8 @@ RUN git clone https://github.com/ethcore/parity && \
 
 RUN file /build/parity/target/release/parity
 
+VOLUME /config
+VOLUME /data
+
 EXPOSE 8080 8545 8180
-ENTRYPOINT ["/build/parity/target/release/parity"]
+ENTRYPOINT ["/build/parity/target/release/parity", "--config", "/config/config.toml", "--base-path", "/data"]
