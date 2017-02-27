@@ -3,7 +3,7 @@ version: '2.1'
 services:
   mach1:
     container_name: mach1
-    image: docker.parity
+    image: parity
     volumes:
     - ./config:/config
     - ./mach1:/data
@@ -11,7 +11,7 @@ services:
 
   mach2:
     container_name: mach2
-    image: docker.parity
+    image: parity
     volumes:
     - ./config:/config
     - ./mach2:/data
@@ -19,7 +19,7 @@ services:
 
   mach3:
     container_name: mach3
-    image: docker.parity
+    image: parity
     volumes:
     - ./config:/config
     - ./mach3:/data
@@ -27,7 +27,7 @@ services:
 
   mach4:
     container_name: mach4
-    image: docker.parity
+    image: parity
     volumes:
     - ./config:/config
     - ./mach4:/data
@@ -40,7 +40,7 @@ services:
       - mach3
       - mach4
     container_name: gateway
-    image: docker.parity
+    image: parity
     ports:
       - 8545:8545
     volumes:
