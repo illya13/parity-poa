@@ -16,7 +16,9 @@ _web3._extend({
             new _web3._extend.Property({
                 name: 'pendingTransactions',
                 getter: 'parity_pendingTransactions',
-                outputFormatter: JSON.stringify
+                outputFormatter: function (res) {
+                  return res.length;
+                }
             })
         ]
 });
@@ -87,12 +89,13 @@ function waitProcessed() {
     } else {
       blocks++;
       console.log("\tblock", res);
-      console.log("\tpendingTransactions", _web3.parity.pendingTransactions);
-      if (JSON.parse(_web3.parity.pendingTransactions).length == 0) {
+      const pendingTransactions = _web3.parity.pendingTransactions;
+      console.log("\tpendingTransactions", pendingTransactions);
+      if (pendingTransactions == 0) {
         console.log("processed", ((new Date() - _start) / 1000) + ' s');
         latestFilter.stopWatching();
         verify();
-      } else if (blocks > 10) {
+      } else if (blocks > 20) {
         console.log("processed", "FAILED");
         latestFilter.stopWatching();
         verify();
