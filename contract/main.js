@@ -8,23 +8,6 @@ const Wallet = require('ethereumjs-wallet');
 const Web3 = require('web3');
 
 const _web3 = new Web3(new Web3.providers.HttpProvider(config.get('provider')));
-_web3._extend({
-    property: 'txpool',
-    methods: [],
-    properties:
-        [
-            new _web3._extend.Property({
-                name: 'status',
-                getter: 'txpool_status',
-                outputFormatter: function(status) {
-                    status.pending = _web3._extend.utils.toDecimal(status.pending);
-                    status.queued = _web3._extend.utils.toDecimal(status.queued);
-                    return status;
-                }
-            })
-        ]
-});
-
 const _contract = _web3.eth.contract(ABI).at(config.get('address'));
 
 let nonces = {};
@@ -91,12 +74,7 @@ function waitProcessed() {
     } else {
       blocks++;
       console.log("\tblock", res);
-      console.log("\ttxpool", _web3.txpool.status);
-      if (_web3.txpool.status.pending == 0) {
-        console.log("processed", ((new Date() - _start) / 1000) + ' s');
-        latestFilter.stopWatching();
-        verify();
-      } else if (blocks > 10) {
+      if (blocks > 1) {
         console.log("processed", "FAILED");
         latestFilter.stopWatching();
         verify();
